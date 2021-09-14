@@ -3,7 +3,7 @@
 import java.net.Socket;
 import java.util.Scanner;
 
-public class pila2 {
+public class pila {
     public static void main(String[] args) {
        Scanner sc = new Scanner(System.in);
        int cont=0,opt=0;
