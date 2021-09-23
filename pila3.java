@@ -61,9 +61,9 @@ public class pila3 {
                         /*if(numc>0){
                             System.out.println(cpomp[j] +" aparece " + numc);
                             System.out.println();
-                        numc=0;
-                        }*/
                         
+                        }*/
+                        numc=0;
                     } 
                     for (int j= 0; j<26;j++){
                         for (int i=j+1; i<26-1;i++){
@@ -77,7 +77,7 @@ public class pila3 {
                     for(int i=0;i<26;i++){
                         System.out.print(" ");
                     }
-                    System.out.println(cpomp[24] + " El mayor es:  "+ mayor[24] );
+                    System.out.println(cpomp[24] + " aparece:  "+ mayor[24] );
                 }else{
                     System.out.println("pila vacia....");
                 }
