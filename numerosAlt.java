@@ -12,12 +12,12 @@ public class numerosAlt {
     public class Nodo {
 
         int Dato;
-        Nodo Next;
+        Nodo siguiente;
+        Nodo atras;
     }
     int nodos=500;
     Nodo inicial = null;
     Nodo fin = null;
-    int r;
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -36,16 +36,16 @@ public class numerosAlt {
 
             switch (opc = sc.nextInt()) {
                 case 1:
-                    n.Llenar();
+                    n.LlenarN();
                     break;
                 case 2:
-                    n.Mostrar();
+                    n.MostrarN();
                     break;
                 case 3:
-                    n.Ordenar();
+                    n.OrdenarN();
                     break;
                 case 4:
-                    n.Elimrepet();
+                    n.Eliminar();
                     break;
                 case 5:
                     n.Agregarfalt();
@@ -56,102 +56,110 @@ public class numerosAlt {
 
     }
 
-    public void Llenar() {
-        int [] conparar =new int [501];
+    public void LlenarN() {
         if(inicial==null){
             inicial = new Nodo();
-            inicial.Next = null;
+            inicial.siguiente = null;
             for (int i = 2; i <= 500; i++) {
                 int Numeros = ((int) (Math.random() * 500 + 0));
-                conparar[i]=Numeros;
                 Nodo temp;
                 temp = new Nodo();
                 temp.Dato = Numeros;
-                temp.Next = inicial;
-                        
+                temp.siguiente = inicial;
                 inicial = temp;
             }
         
-        System.out.println("\n"+"Datos agregados"+conparar);
+        System.out.println("\n"+"Datos agregados");
         }else{
-            System.out.println("\n"+"Seleccione la opcion 5!!!");
+            System.out.println("\n"+"lista llena");
         }
     }
 
-    public void Mostrar() {
+    public void MostrarN() {
         Nodo actual = new Nodo();
         actual = inicial;
         if (inicial != null) {
             while (actual != null) {
-                for (int i = 1; i <= nodos; i++) {
+                for (int i = 1; i <= 500; i++) {
                 System.out.println("Nodo "+i+" [ " + actual.Dato + " ] ");
-                actual = actual.Next;
+                actual = actual.siguiente;
                 }
             }
         }
     }
 
-    public void Ordenar() {
-        int  au;
+    public void OrdenarN() {
         if (inicial != null) {
             System.out.println("\n"+"Datos ordenados ");
-            for (int cont = 1; cont <= 500; cont++) {
+            for (int i = 1; i <= 500; i++) {
                 Nodo anterior = new Nodo();
                 anterior = inicial;
                 Nodo actual = new Nodo();
-                actual = anterior.Next;
-                for (int i = 0; i <= 500 - 1; i++) {
-                    for (int j = 0; j <= 500 - 1; j++) {
-                        while (anterior.Next != null) {
-                            if (anterior.Dato == actual.Dato) {
+                actual = anterior.siguiente;
+                    for (int j = 499; j >= 0; j--) {
+                        while (anterior.siguiente != null) {
+                            if (anterior.Dato > actual.Dato) {
+                                int  au;
                                 au = anterior.Dato;
                                 anterior.Dato = actual.Dato;
                                 actual.Dato = au;
                             }
                             anterior = actual;
-                            actual = anterior.Next;
+                            actual = anterior.siguiente;
                         }
                     }
-                }
             }
         }
     }
-
-    public void Elimrepet() {
-        int  au;
+    public void Eliminar() {
         if (inicial != null) {
-            for (int cont = 1; cont <= 500; cont++) {
-                Nodo anterior = new Nodo();
-                anterior = inicial;
-                Nodo actual = new Nodo();
-                actual = anterior.Next;
-                for (int i = 0; i <= 500 - 1; i++) {
-                    for (int j = 0; j <= 500 - 1; j++) {
-                        while (anterior.Next != null) {
-                            if (anterior.Dato == actual.Dato) {
-                                int contador=1;
-                                contador++;
-                                System.out.println(contador);
+            System.out.println("\n"+"Datos ordenados ");
+            for (int i = 1; i <= 500; i++) {
+                Nodo temp=inicial;
+                int contador=1;
+                while (temp != null){
+                    if(temp.Dato==i){
+                        contador++;
+                    }
+                }
+                if(contador>1){
+                    for(int j=contador-1;j>0;j--){
+                        Nodo anterior=new Nodo ();
+                        anterior=null;
+                        Nodo actual=new Nodo();
+                        actual=inicial;
+                        while(actual!=null){
+                            if(actual.Dato==i){
+                                if(actual==inicial){
+                                    inicial=inicial.siguiente;
+                                    inicial.atras=null;
+                                }
+                                else{
+                                    anterior.siguiente=actual.siguiente;
+                                    actual=actual.siguiente;
+                                    actual.atras=anterior.atras;
+                                }
                             }
+                            anterior=actual;
+                            actual=anterior.siguiente;
                         }
                     }
                 }
-            }
+            }   
         } else {
             System.out.print("\n" + "La lista esta vacia!!!");
         }
         System.out.println("");
        
     }
-
     public void Agregarfalt() {
         for (int i = nodos; i <= 499; i++) {
-            int Numeros2 = ((int) (Math.random() * 9 + 1));
+            int Numeros2 = ((int) (Math.random() * 500 + 0));
             Nodo temp;//Si la lista tiene valores entonces se creara un nodo temporal para almacenarlo en la lista y hara el mimos procediminto como anteriormente
             temp = new Nodo();//Nuevo nodo temporal
             //System.out.print("\n" + "Ingresa el contenido para el nodo: ");
             temp.Dato = Numeros2;
-            temp.Next = inicial;
+            temp.siguiente = inicial;
             //System.out.print(reset + "[" + azul + temp.name + reset + "]\n");
             inicial = temp;
             nodos++;
